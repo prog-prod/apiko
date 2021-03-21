@@ -16,6 +16,7 @@ name: "Footer"
     width: 100%;
     overflow: hidden;
     bottom:0;
+    left: 0;
     height: 73px;
     background: rgba(192, 196, 206, 0.127321);
     span{

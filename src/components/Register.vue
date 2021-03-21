@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-guest></header-guest>
+    <header-component v-on:show-liked="showLiked" type="light"></header-component>
     <div class="container">
       <div class="page-content">
         <div class="card">
@@ -8,16 +8,16 @@
           <form @submit.prevent="register" action="">
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" class="form-control" placeholder="Example@gmail.com">
+              <input type="email" v-model="email" id="email" class="form-control" placeholder="Example@gmail.com">
             </div>
             <div class="form-group">
               <label for="full-name">Full name</label>
-              <input type="email" id="full-name" class="form-control" placeholder="Tony Stark">
+              <input type="text" v-model="fullName" id="full-name" class="form-control" placeholder="Tony Stark">
             </div>
             <div class="form-group">
               <label for="password">Password</label>
               <div class="input-group">
-                <input :type="typePassw" id="password" class="form-control" required>
+                <input :type="typePassw" v-model="password" id="password" class="form-control" required>
                 <span class="input-btn">
                   <i class="eye-icon" @click="typePassw = typePassw=== 'password' ? 'text' : 'password'"></i>
                 </span>
@@ -26,7 +26,7 @@
             <div class="form-group">
               <label for="password-again">Password again</label>
               <div class="input-group">
-                <input :type="typePasswAgain" id="password-again" class="form-control" required>
+                <input :type="typePasswAgain" v-model="passwordRepeat" id="password-again" class="form-control" required>
                 <span class="input-btn">
                   <i class="eye-icon" @click="typePasswAgain = typePasswAgain === 'password' ? 'text' : 'password'"></i>
                 </span>
@@ -45,22 +45,39 @@
 </template>
 
 <script>
-import HeaderGuest from "@/components/layout/HeaderGuest";
+import HeaderComponent from "@/components/layout/Header";
 import FooterComponent from "@/components/layout/Footer";
+// import {auth} from "@/db";
+import {mapActions} from "vuex";
 export default {
   name: "Register",
   data: () => ({
     typePassw: 'password',
     typePasswAgain: 'password',
+    email:'pol@mail.com',
+    fullName:'',
+    password:'123123',
+    passwordRepeat:'123123',
   }),
   components: {
-    HeaderGuest,
+    HeaderComponent,
     FooterComponent
   },
   methods: {
+    ...mapActions(['changeShowLikedProducts']),
     register(){
-
+      if(this.password !== this.passwordRepeat){
+        this.$toastr.e('Password is not match')
+      }
+      // let userId = 1;
+      // auth.createUserWithEmailAndPassword(this.email, this.password).then( d => {
+      //
+      // })
     },
+    showLiked(){
+      this.changeShowLikedProducts(true);
+      this.$router.replace('/');
+    }
   }
 }
 </script>
@@ -68,8 +85,6 @@ export default {
 <style lang="scss" scoped>
 .page-content {
   padding: 55px 10px;
-  //display: flex;
-  //justify-content: center;
   .card{
     margin: 0 auto;
     padding:25px 24px 21px 24px;

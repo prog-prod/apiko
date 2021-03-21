@@ -13,7 +13,10 @@
     "firebase": "^8.3.1",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.11",
-    "vuefire": "^3.0.0-alpha.2"
+    "vue-select": "^3.11.2",
+    "vue-toastr": "^2.1.2",
+    "vuefire": "^3.0.0-alpha.2",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "-": "^0.0.1",

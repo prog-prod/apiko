@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-guest></header-guest>
+    <header-component v-on:show-liked="showLiked" type="light"></header-component>
     <div class="container">
       <div class="page-content">
         <div class="card">
@@ -33,21 +33,27 @@
 </template>
 
 <script>
-import HeaderGuest from "@/components/layout/HeaderGuest";
+import HeaderComponent from "@/components/layout/Header";
 import FooterComponent from "@/components/layout/Footer";
+import {mapActions} from "vuex";
 export default {
   name: "Login",
   data: () => ({
     typePassw: 'password',
   }),
   components: {
-    HeaderGuest,
+    HeaderComponent,
     FooterComponent
   },
   methods: {
+    ...mapActions(['changeShowLikedProducts']),
     login(){
       this.$router.replace('/');
     },
+    showLiked(){
+      this.changeShowLikedProducts(true);
+      this.$router.replace('/');
+    }
   }
 }
 </script>

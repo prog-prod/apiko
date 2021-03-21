@@ -22,6 +22,10 @@ a{
     margin: 0 auto;
     max-width: 1184px;
 }
+.container-small {
+    margin: 0 auto;
+    max-width: 855px;
+}
 .btn{
     border-radius: 4px;
     width: 131px;
@@ -56,6 +60,7 @@ a{
         align-items: center;
         li{
             margin-left: 33px;
+            font-weight: 300;
         }
     }
 }
@@ -102,11 +107,12 @@ a{
         color: #303030;
         display: block;
     }
-    input{
+    input,textarea, .form-control{
         background: #F9FAFB;
         border: 1px solid #DEDEE0;
         box-sizing: border-box;
         border-radius: 5px;
+        font-weight: 300;
         width: 100%;
         height: 58px;
         font-size: 16px;
@@ -143,4 +149,10 @@ a{
 }
 .text-center{
     text-align: center !important;
+}
+.inline-block{
+    display: inline-block;
+}
+.mb-0{
+    margin-bottom: 0;
 }

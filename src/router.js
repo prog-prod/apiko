@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Login from "@/components/Login";
 import Register from "@/components/Register";
 import Products from "@/components/Products";
+import AddProduct from "@/components/AddProduct";
 
 const routes = [
     {
@@ -19,13 +20,20 @@ const routes = [
         meta: {
             title: 'Register'
         }
+    },{
+        path: "/add-product",
+        component: AddProduct,
+        name: "add-product",
+        meta: {
+            title: 'Add Product'
+        }
     },
     {
         path: "/",
         component: Products,
         name: "products",
         meta: {
-            title: "Test task",
+            title: "Products",
         }
     },
 ];

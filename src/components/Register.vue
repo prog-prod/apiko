@@ -54,10 +54,10 @@ export default {
   data: () => ({
     typePassw: 'password',
     typePasswAgain: 'password',
-    email:'pol@mail.com',
+    email:'',
     fullName:'',
-    password:'123123',
-    passwordRepeat:'123123',
+    password:'',
+    passwordRepeat:'',
   }),
   components: {
     HeaderComponent,

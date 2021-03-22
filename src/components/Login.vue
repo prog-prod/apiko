@@ -41,8 +41,8 @@ export default {
   name: "Login",
   data: () => ({
     typePassw: 'password',
-    email:'polyk@mail.com',
-    password: '12344321'
+    email:'',
+    password: ''
   }),
   components: {
     HeaderComponent,

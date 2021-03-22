@@ -38,7 +38,7 @@ import {mapActions, mapGetters} from "vuex";
 import {db} from "@/db";
 
 export default {
-  name: "Products",
+  name: "Products", // index page
   data: () => ({
     products:[],
   }),

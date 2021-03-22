@@ -6,7 +6,8 @@
           <logo v-if="headerType === 'dark'" type="dark"></logo>
           <logo v-else type="light"/>
         </div>
-        <nav class="navbar-nav">
+        <div class="burger" :class="{'dark': headerType === 'light'}" @click="showCollapse"><img src="../../assets/burger.svg" alt=""></div>
+        <nav class="navbar-nav collapse-content">
           <ul>
             <slot name="navbar-nav">
               <li><router-link class="btn btn-green" to="#">Sell</router-link></li>
@@ -15,8 +16,8 @@
             </slot>
             <template v-if="user">
               <li class="position-relative">
-                <span class="dropdown-btn" @click="showDropdown = !showDropdown">{{user.email}}</span>
-                <div class="dropdown-menu" v-show="showDropdown"><a href="#" @click="logout">Logout</a></div>
+                <span class="dropdown-btn">{{user.email}}</span>
+                <div class="dropdown-menu"><a href="#" @click="logout">Logout</a></div>
               </li>
             </template>
             <li>
@@ -27,7 +28,32 @@
           </ul>
         </nav>
       </div>
-      <slot name="container"></slot>
+      <div class="mobile-menu" id="mobile-menu">
+        <nav class="navbar-nav">
+          <ul>
+            <slot name="navbar-nav">
+              <li><router-link class="btn btn-green" to="#">Sell</router-link></li>
+              <li v-if="$route.name === 'register'"><router-link class="nav-link" to="/login">Login</router-link></li>
+              <li v-else-if="$route.name === 'login'"><router-link class="nav-link" to="/register">Register</router-link></li>
+            </slot>
+            <template v-if="user">
+              <li class="position-relative">
+                <span class="dropdown-btn">{{user.email}}</span>
+                <div class="dropdown-menu"><a href="#" @click="logout">Logout</a></div>
+              </li>
+            </template>
+            <li>
+              <a @click.prevent="showLiked" >
+                <heart-icon :fill="this.liked ? '#349A89' : headerType === 'dark' ? '#ffffff' : '#33333A'"></heart-icon>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <slot name="container"></slot>
+      </div>
+      <div class="collapse-content">
+        <slot name="container"></slot>
+      </div>
     </div>
   </header>
 </template>
@@ -37,13 +63,15 @@ import HeartIcon from "@/components/ui/icons/HeartIcon";
 import Logo from "@/components/ui/Logo";
 import {auth} from "@/db";
 import {mapActions, mapGetters} from "vuex";
+import $ from 'jquery';
+
 export default {
 name: "HeaderGuest",
   data: () => ({
     showDropdown: false
   }),
   props:[
-      'type',
+      'type', // can be dark / light
       'liked'
   ],
   computed:{
@@ -63,7 +91,15 @@ name: "HeaderGuest",
         this.$router.replace('/login')
         this.updateUser(null)
       }).catch(d => this.$toastr.e(d.message));
+    },
+    showCollapse(){
+      $('.mobile-menu').slideToggle();
     }
+  },
+  mounted() {
+    $('header .dropdown-btn').on('click', function () {
+      $('.dropdown-menu').fadeToggle();
+    })
   },
   components:{
     HeartIcon,
@@ -72,10 +108,17 @@ name: "HeaderGuest",
 }
 </script>
 
-<style lang="scss" scoped>
-  header.dark{
+<style lang="scss">
+
+header {
+  .burger{
+    display: none;
+    &.dark{
+      filter: invert(1);
+    }
+  }
+  &.dark{
     color:white;
-    padding-bottom: 14px;
     background: linear-gradient(180deg, #090810 0%, #171236 100%);
     .navbar-nav{
       color:white;
@@ -97,13 +140,13 @@ name: "HeaderGuest",
     position: absolute;
     top:100%;
     background: white;
-
+    z-index: 999;
     border-radius: 5px;
     color:#333;
     margin-top:10px;
     width: 100%;
     padding:5px 0 ;
-
+    display: none;
     &> a{
       padding:5px 0 ;
       //border-radius: 5px;
@@ -118,6 +161,17 @@ name: "HeaderGuest",
   .dropdown-btn{
     cursor: pointer;
     width: 100%;
-
   }
+}
+@media (max-width: 500px) {
+  header .burger{
+    display: block;
+  }
+  header .collapse-content{
+    display: none;
+  }
+  .header-container{
+    padding: 18px 25px !important;
+  }
+}
 </style>

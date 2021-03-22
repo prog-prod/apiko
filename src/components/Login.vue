@@ -38,7 +38,7 @@ import FooterComponent from "@/components/layout/Footer";
 import {mapActions} from "vuex";
 import {auth} from "@/db";
 export default {
-  name: "Login",
+  name: "Login", // Login page template
   data: () => ({
     typePassw: 'password',
     email:'',

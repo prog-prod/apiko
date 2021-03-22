@@ -10,7 +10,7 @@ firebase.initializeApp(firebaseConfig)
 export const db = firebase.firestore();
 export const auth = firebase.auth();
 
-
+// fetch method to get current user from firebase. We use it in router.js
 auth.getCurrentUser = () => {
     return new Promise((resolve, reject) => {
         const unsubscribe = auth.onAuthStateChanged(user => {

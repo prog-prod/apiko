@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
               <label for="photos">Photos</label>
-              <input type="text" id="photos" v-model="img" class="form-control" placeholder="For example: Los Angeles, CA">
+              <input type="text" id="photos" v-model="img" class="form-control" placeholder="For example: https://unsplash.com/collections/256447/food-and-drink">
             </div>
             <div class="form-group mb-0">
               <label for="price">Price</label>

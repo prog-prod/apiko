@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss" scoped>
   .container-small{
-    padding: 0 10px;
+    padding: 0 10px 14px 10px;
   }
   .search-icon,.location-icon{
     position: absolute;
@@ -84,7 +84,7 @@ export default {
     margin: 0 auto;
     display: grid;
     grid-column-gap: 5px;
-    grid-row-gap: 5px;
+    grid-row-gap: 10px;
     grid-template-columns: 60% 1fr 1fr;
     .search-input, .location-input {
       position: relative;

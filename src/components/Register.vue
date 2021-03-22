@@ -47,7 +47,7 @@
 <script>
 import HeaderComponent from "@/components/layout/Header";
 import FooterComponent from "@/components/layout/Footer";
-// import {auth} from "@/db";
+import {auth, db} from "@/db";
 import {mapActions} from "vuex";
 export default {
   name: "Register",
@@ -67,12 +67,19 @@ export default {
     ...mapActions(['changeShowLikedProducts']),
     register(){
       if(this.password !== this.passwordRepeat){
-        this.$toastr.e('Password is not match')
+        return this.$toastr.e('Password is not match')
       }
-      // let userId = 1;
-      // auth.createUserWithEmailAndPassword(this.email, this.password).then( d => {
-      //
-      // })
+
+      auth.createUserWithEmailAndPassword(this.email, this.password).then( () => {
+          db.collection('users').add({
+            createdAt: new Date(),
+            fullName: this.fullName,
+            email: this.email
+          })
+      }).then( () => {
+        this.$toastr.s('Account has been created successfully.')
+        this.$router.replace('/');
+      }).catch( d => this.$toastr.e(d.message));
     },
     showLiked(){
       this.changeShowLikedProducts(true);

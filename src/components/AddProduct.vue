@@ -3,7 +3,6 @@
     <header-component v-on:show-liked="showLiked">
       <template v-slot:navbar-nav>
         <li><router-link class="btn btn-green" to="/">Back</router-link></li>
-        <li><span>User</span></li>
       </template>
     </header-component>
     <page-content>

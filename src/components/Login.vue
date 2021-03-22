@@ -8,12 +8,12 @@
           <form @submit.prevent="login" action="">
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" class="form-control" placeholder="Example@gmail.com">
+              <input type="email" id="email" v-model="email" class="form-control" placeholder="Example@gmail.com" required>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
               <div class="input-group">
-                <input :type="typePassw" id="password" class="form-control" required>
+                <input :type="typePassw" v-model="password" id="password" class="form-control" required>
                 <span class="input-btn">
                   <i class="eye-icon" @click="typePassw = typePassw=== 'password' ? 'text' : 'password'"></i>
                 </span>
@@ -36,10 +36,13 @@
 import HeaderComponent from "@/components/layout/Header";
 import FooterComponent from "@/components/layout/Footer";
 import {mapActions} from "vuex";
+import {auth} from "@/db";
 export default {
   name: "Login",
   data: () => ({
     typePassw: 'password',
+    email:'polyk@mail.com',
+    password: '12344321'
   }),
   components: {
     HeaderComponent,
@@ -48,7 +51,11 @@ export default {
   methods: {
     ...mapActions(['changeShowLikedProducts']),
     login(){
-      this.$router.replace('/');
+      auth.signInWithEmailAndPassword(this.email, this.password)
+          .then( () => {
+            this.$router.replace("/")
+          })
+          .catch((error) =>  this.$toastr.e(error.message));
     },
     showLiked(){
       this.changeShowLikedProducts(true);

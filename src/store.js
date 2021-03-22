@@ -44,9 +44,8 @@ export default new Vuex.Store({
         updateSearchLocation(store, data){
             store.commit('setSearchLocation', data);
         },
-        fetchUser(store, data){
-
-            store.commit('setUser', data);
+        updateUser(store,user){
+            store.commit('setUser', user);
         }
     },
     mutations: {

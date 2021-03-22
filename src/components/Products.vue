@@ -4,7 +4,6 @@
     <header-component :liked="showLikedProducts" v-on:show-liked="showLiked">
       <template v-slot:navbar-nav>
         <li><router-link class="btn btn-green" :to="{ name: 'add-product'}">+ Add</router-link></li>
-        <li><span>User</span></li>
       </template>
       <template v-slot:container>
         <search-component v-on:search="searchProduct"></search-component>
@@ -52,7 +51,6 @@ export default {
         products = this.products.filter(d => d.liked)
       }
 
-      console.log(this.filter)
       // price filter
       products = products.filter( d => {
         if(this.filter.minPrice !== '' && this.filter.maxPrice !== '')
@@ -73,7 +71,6 @@ export default {
 
       }
       if(this.searchLocation !== ''){
-        console.log(this.searchLocation)
         products = products.filter( d => {
           return new RegExp(this.searchLocation,'i').test(d.location);
         });
@@ -99,7 +96,7 @@ export default {
       this.updateSearch(text);
       this.updateSearchLocation(location);
     }
-  },
+  }, // fetch products from firestore and init products in data
   firestore () {
     return {
       products: db.collection('products')

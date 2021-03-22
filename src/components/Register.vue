@@ -8,16 +8,16 @@
           <form @submit.prevent="register" action="">
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" v-model="email" id="email" class="form-control" placeholder="Example@gmail.com">
+              <input type="email" maxlength="255" v-model="email" id="email" class="form-control" placeholder="Example@gmail.com">
             </div>
             <div class="form-group">
               <label for="full-name">Full name</label>
-              <input type="text" v-model="fullName" id="full-name" class="form-control" placeholder="Tony Stark">
+              <input type="text"  maxlength="100" pattern="[A-Za-z 0-9]*" v-model="fullName" id="full-name" class="form-control" placeholder="Tony Stark">
             </div>
             <div class="form-group">
               <label for="password">Password</label>
               <div class="input-group">
-                <input :type="typePassw" v-model="password" id="password" class="form-control" required>
+                <input :type="typePassw" pattern="[A-Za-z0-9]{6,12}" maxlength="255" v-model="password" id="password" class="form-control" required>
                 <span class="input-btn">
                   <i class="eye-icon" @click="typePassw = typePassw=== 'password' ? 'text' : 'password'"></i>
                 </span>
@@ -26,7 +26,7 @@
             <div class="form-group">
               <label for="password-again">Password again</label>
               <div class="input-group">
-                <input :type="typePasswAgain" v-model="passwordRepeat" id="password-again" class="form-control" required>
+                <input :type="typePasswAgain" pattern="[A-Za-z0-9]{6,12}" maxlength="255" v-model="passwordRepeat" id="password-again" class="form-control" required>
                 <span class="input-btn">
                   <i class="eye-icon" @click="typePasswAgain = typePasswAgain === 'password' ? 'text' : 'password'"></i>
                 </span>

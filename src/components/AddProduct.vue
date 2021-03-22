@@ -12,23 +12,24 @@
           <form @submit.prevent="addProduct(title,location,description,img,price)" action="">
             <div class="form-group">
               <label for="title">Title <span>*</span></label>
-              <input type="text" id="title" v-model="title" class="form-control" placeholder="For Example: Iron man suit" required>
+              <input type="text" id="title" minlength="2" maxlength="40" pattern="[A-Za-z 0-9]*" v-model="title" class="form-control" placeholder="For Example: Iron man suit" required>
             </div>
             <div class="form-group">
               <label for="location">Location <span>*</span></label>
-              <input type="text" id="location" v-model="location" class="form-control" placeholder="For example: Los Angeles, CA" required>
+              <input type="text" id="location" minlength="2" maxlength="100" pattern="[A-Za-z 0-9]*" v-model="location" class="form-control" placeholder="For example: Los Angeles, CA" required>
             </div>
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea type="text" id="description" v-model="description" class="form-control" placeholder="For example: Iron man suit"></textarea>
+              <textarea type="text" id="description" maxlength="255"  v-model="description" class="form-control" placeholder="For example: Iron man suit"></textarea>
             </div>
             <div class="form-group">
               <label for="photos">Photos</label>
-              <input type="text" id="photos" v-model="img" class="form-control" placeholder="For example: https://unsplash.com/collections/256447/food-and-drink">
+              <input type="text" id="photos" v-model="img" maxlength="300" pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?"
+                     class="form-control" placeholder="For example: https://unsplash.com/collections/256447/food-and-drink">
             </div>
             <div class="form-group mb-0">
               <label for="price">Price</label>
-              <input type="number" id="price" v-model="price" class="form-control" placeholder="For example: Los Angeles, CA">
+              <input type="number" id="price" v-model="price" min="1" maxlength="10" class="form-control" placeholder="For example: Los Angeles, CA">
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-lg btn-green">Submit</button>

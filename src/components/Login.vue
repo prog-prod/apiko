@@ -8,12 +8,12 @@
           <form @submit.prevent="login" action="">
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" v-model="email" class="form-control" placeholder="Example@gmail.com" required>
+              <input type="email" maxlength="255" id="email" v-model="email" class="form-control" placeholder="Example@gmail.com" required>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
               <div class="input-group">
-                <input :type="typePassw" v-model="password" id="password" class="form-control" required>
+                <input :type="typePassw" pattern="[A-Za-z0-9]{6,12}$" maxlength="255" v-model="password" id="password" class="form-control" required>
                 <span class="input-btn">
                   <i class="eye-icon" @click="typePassw = typePassw=== 'password' ? 'text' : 'password'"></i>
                 </span>

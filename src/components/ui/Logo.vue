@@ -1,7 +1,9 @@
 <template>
   <div class="logo">
-    <img v-if="type === 'dark'" src="../../assets/LogoDark.svg" alt="">
-    <img v-else src="../../assets/LogoLight.svg" alt="">
+    <a href="/">
+      <img v-if="type === 'dark'" src="../../assets/LogoDark.svg" alt="">
+      <img v-else src="../../assets/LogoLight.svg" alt="">
+    </a>
   </div>
 </template>
 
